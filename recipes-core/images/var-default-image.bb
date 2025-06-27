@@ -4,7 +4,7 @@ machines including GUI, demos and lots of applications. This creates a very \
 large image, not suitable for production."
 LICENSE = "MIT"
 
-inherit core-image populate_sdk_qt5
+inherit core-image populate_sdk_qt6
 
 ### WARNING: This image is NOT suitable for production use and is intended
 ###          to provide a way for users to reproduce the image used during
@@ -23,8 +23,8 @@ IMAGE_FEATURES += " \
             '', d), d)} \
 "
 
-QT_PROVIDER ?= "qt5"
-QT5_PKGS = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'packagegroup-arago-tisdk-qte', '', d)}"
+QT_PROVIDER ?= "qt6"
+#QT5_PKGS = "${@oe.utils.conditional('QT_PROVIDER', 'qt6', 'packagegroup-arago-tisdk-qte', '', d)}"
 
 SWUPDATE_PKGS = " \
 	swupdate \
@@ -47,7 +47,6 @@ IMAGE_INSTALL += "\
     zstd \
     libcamera \
     resize-rootfs \
-    ${QT5_PKGS} \
     ${@bb.utils.contains("BBFILE_COLLECTIONS","swupdate", "${SWUPDATE_PKGS}",'',d)} \
     f2fs-tools \
 "
